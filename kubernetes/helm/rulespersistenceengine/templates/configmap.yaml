@@ -1,0 +1,13 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  annotations:
+    meta.helm.sh/release-name: {{ .Values.configmap.metadata.labels.app }}
+    meta.helm.sh/release-namespace: {{ .Values.configmap.metadata.namespace }}
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: {{ .Values.configmap.metadata.name }}
+  namespace: {{ .Values.configmap.metadata.namespace }}
+data:
+  LOG_LEVEL: {{ .Values.configmap.data.LOG_LEVEL }}
+  LOGPATTERN: {{ .Values.configmap.data.LOGPATTERN | toJson }}

@@ -1,0 +1,18 @@
+buildTool: maven
+type: springboot
+packaging: jar
+category: application
+liquibase: "false"
+profile: sanita-digitale
+jdk: "17"
+repos:
+  nexus:
+    snapshot: maven-snapshots-aria-lombardia
+    releases: maven-releases-aria-lombardia
+    helm: helm-templates-aria-lombardia
+    docker: aria-lombardia
+maven:
+  buildCommand: ""
+aws:
+  namespace:
+    svil: aria-dev-svc

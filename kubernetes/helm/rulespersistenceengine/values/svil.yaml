@@ -1,0 +1,97 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+restartPolicy: Always
+strategy: Recreate
+
+deployment:
+  labels:
+    app: rulespersistenceengine
+    chartname: rulespersistenceengine-chart
+  name: rulespersistenceengine
+  namespace: aria-dev-svc
+  dnsPolicy: ClusterFirst
+  schedulerName: default-scheduler
+
+image:
+  repository: nginx
+  pullPolicy: Always
+  name: rulespersistenceengine
+
+imagePullSecrets:
+  name: jenkins-master-secret
+nameOverride: ""
+fullnameOverride: ""
+
+nexusImagePullSecrets:
+  name: aria-nexus-registry-credentials
+nameOverride: ""
+fullnameOverride: ""
+
+
+serviceAccount:
+  serviceAccount: jenkins-master
+  serviceAccountName: jenkins-master
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+service:
+  labels:
+    app: rulespersistenceengine
+  name: rulespersistenceengine
+  namespace: aria-dev-svc
+  type: ClusterIP
+  port: 8080
+
+configmap:
+  metadata:
+    labels:
+      app: rulespersistenceengine
+    name: rulespersistenceengine-config
+    namespace: aria-dev-svc
+  data:
+    LOG_LEVEL: INFO
+    LOGPATTERN: "%d{dd/MM/YYYY HH:mm:ss.SSS} | %-5level | MS :%X{serviceName} | Correlation-Id : %X{id} | Requested: %X{url} | %msg | %logger{1.}.%M(%line) | User : %X{user} | HostName : %X{hostName} | IP: %X{hostIp}%n"
+
+ingress:
+  metadata:
+    name: rulespersistenceengine
+    namespace: aria-dev-svc
+  data:
+    path: /svil-rulespersistenceengine(/|$)(.*)
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Gi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  matchExpressions:
+    tier_key: tier
+    project_key: project
+    operator: In

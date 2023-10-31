@@ -1,0 +1,72 @@
+{"properties": [
+  {
+    "name": "feignClient.rules-persistence-engine",
+    "type": "java.lang.String",
+    "description": "A description for 'feignClient.rules-persistence-engine'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl-enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl-enabled'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl.invalid-host-name-allowed",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl.invalid-host-name-allowed'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl.key-store",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl.key-store'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl.key-store-password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl.key-store-password'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl.key-password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl.key-password'"
+  },
+  {
+    "name": "spring.data.mongodb.ssl.pem",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.data.mongodb.ssl.pem'"
+  },
+  {
+    "name": "mongo.ssl.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.ssl.enabled'"
+  },
+  {
+    "name": "mongo.ssl.pem",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.ssl.pem'"
+  },
+  {
+    "name": "mongo.passwordLess",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.passwordLess'"
+  },
+  {
+    "name": "mongo.ssl.invalidHostNameAllowed",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.ssl.invalidHostNameAllowed'"
+  },
+  {
+    "name": "mongo.ssl.passwordLess",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.ssl.passwordLess'"
+  },
+  {
+    "name": "mongo.authenticationMechanisms",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.authenticationMechanisms'"
+  },
+  {
+    "name": "feignClient.rules-persistence-engine",
+    "type": "java.lang.String",
+    "description": "A description for 'feignClient.rules-persistence-engine'"
+  }
+]}

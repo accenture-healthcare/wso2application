@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    meta.helm.sh/release-name: {{ .Values.deployment.name }}
+    meta.helm.sh/release-namespace: {{ .Values.deployment.namespace }}
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app: {{ .Values.deployment.labels.app }}
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.labels.app }}
+  strategy:
+    type: {{ .Values.strategy }}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ .Values.deployment.labels.app }}
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.affinity.matchExpressions.tier_key }}
+                    operator: {{ .Values.affinity.matchExpressions.operator }}
+                    values:
+                      - dev
+                  - key: {{ .Values.affinity.matchExpressions.project_key }}
+                    operator: {{ .Values.affinity.matchExpressions.operator }}
+                    values:
+                      - aria
+      containers:
+        - image: aria.acn-hsc.com:8443/aria-lombardia/IMAGE_TAG
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          name: {{ .Values.deployment.name }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configmap.metadata.name }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+      dnsPolicy: {{ .Values.deployment.dnsPolicy }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      schedulerName: {{ .Values.deployment.schedulerName }}
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      serviceAccount: {{ .Values.serviceAccount.serviceAccount }}
+      serviceAccountName: {{ .Values.serviceAccount.serviceAccountName }}
+      imagePullSecrets:
+        - name: {{ .Values.nexusImagePullSecrets.name }}
